@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -23,5 +24,10 @@ public class ProductService {
             throw new RepositoryException(e.getMessage());
         }
         return products;
+    }
+
+    public List<Product> findProductsByCategory(String category){
+        List<Product> products = findAllProducts();
+        return products.stream().filter(product -> product.getCategory().equalsIgnoreCase(category)).collect(Collectors.toList());
     }
 }
