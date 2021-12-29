@@ -1,5 +1,6 @@
 package com.mercadolivre.desafiospring1.controllers;
 
+import com.mercadolivre.desafiospring1.dtos.ArticleDTO;
 import com.mercadolivre.desafiospring1.entities.Article;
 import com.mercadolivre.desafiospring1.entities.Ticket;
 import com.mercadolivre.desafiospring1.services.TicketService;
@@ -18,7 +19,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping(path = "/purchase-request")
-    public ResponseEntity<Ticket> purchaseRequest(@RequestBody Article article) {
+    public ResponseEntity<Ticket> purchaseRequest(@RequestBody ArticleDTO article) {
         return ResponseEntity.status(201).body(ticketService.purchaseRequest(article));
     }
 }

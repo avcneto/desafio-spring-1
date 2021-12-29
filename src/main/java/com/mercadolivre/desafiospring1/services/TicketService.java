@@ -1,5 +1,7 @@
 package com.mercadolivre.desafiospring1.services;
 
+import com.mercadolivre.desafiospring1.dtos.ArticleDTO;
+import com.mercadolivre.desafiospring1.dtos.ProductDTO;
 import com.mercadolivre.desafiospring1.entities.Article;
 import com.mercadolivre.desafiospring1.entities.Product;
 import com.mercadolivre.desafiospring1.entities.Ticket;
@@ -17,15 +19,17 @@ public class TicketService {
     @Autowired
     private ProductService productService;
 
-    public Ticket purchaseRequest(Article article) {
-        List<Product> productsNotExist = new ArrayList<>();
+    public Ticket purchaseRequest(ArticleDTO article) {
+        List<ProductDTO> productsNotExist = new ArrayList<>();
         List<Product> productList = productService.findAllProductsAvaliable();
-        List<Product> purchaseProduts = article.getArticles();
+        List<ProductDTO> purchaseProduts = article.getArticlesDTO();
+        BigDecimal total = BigDecimal.ZERO;
 
-        for (Product purchase : purchaseProduts) {
+        for (ProductDTO purchase : purchaseProduts) {
             if (productList.contains(purchase)) {
-                Integer quantity = productList.get(productList.indexOf(purchase)).getQuantity();
-                if (quantity < purchase.getQuantity()) {
+                Product prod = productList.get(productList.indexOf(purchase));
+                total = total.add(prod.getPrice().multiply(new BigDecimal(purchase.getQuantity())));
+                if (prod.getQuantity() < purchase.getQuantity()) {
                     //TODO
                     throw new InvalidRequestStateException();
                 }
@@ -40,10 +44,7 @@ public class TicketService {
             throw new InvalidRequestStateException();
         }
 
-        BigDecimal total = purchaseProduts.stream()
-                .map(Product::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return new Ticket(1L, new Article(purchaseProduts), total);
+        return new Ticket(1L, new ArticleDTO(purchaseProduts), total);
     }
 }

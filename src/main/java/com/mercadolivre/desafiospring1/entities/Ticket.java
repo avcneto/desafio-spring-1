@@ -1,5 +1,6 @@
 package com.mercadolivre.desafiospring1.entities;
 
+import com.mercadolivre.desafiospring1.dtos.ArticleDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,6 @@ import java.math.BigDecimal;
 @Builder
 public class Ticket {
     private Long id;
-    private Article article;
+    private ArticleDTO article;
     private BigDecimal total;
 }
