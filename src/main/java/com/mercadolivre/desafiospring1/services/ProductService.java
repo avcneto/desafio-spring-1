@@ -33,11 +33,14 @@ public class ProductService {
     public List<Product> getProductByAnyQuery(Map<String, String> requestParams) {
 
         List<Product> productList = findAllProducts();
+        String order = requestParams.containsKey("order") ? requestParams.get("order") : "";
+        requestParams.remove("order");
 
         for (Map.Entry<String, String> entry : requestParams.entrySet()) {
             if (!entry.getValue().equals(null)) {
                 productList = productList.stream().filter(product -> {
                     String valor = requestParams.get(entry.getKey());
+
 
                     if(Is.isNumericException(valor) && product.getPrice().compareTo(new BigDecimal(String.valueOf(valor))) <= 0)
                         return true;
@@ -58,6 +61,29 @@ public class ProductService {
             }
         }
 
+        sortByAnyParam(productList, order);
+
         return productList;
+    }
+
+    public List<Product> sortByAnyParam(List<Product> listProduct, String param){
+
+            switch (param) {
+                case "0":
+                    listProduct.sort((p1, p2) -> (p1.getName().compareTo(p2.getName())));
+                    break;
+                case "1":
+                    listProduct.sort((p1, p2) -> (p2.getName().compareTo(p1.getName())));
+                    break;
+                case "2":
+                    listProduct.sort((p1, p2) -> (p1.getPrice().compareTo(p2.getPrice())));
+                    break;
+                case "3":
+                    listProduct.sort((p1, p2) -> (p2.getPrice().compareTo(p1.getPrice())));
+                    break;
+            }
+
+
+        return listProduct;
     }
 }
