@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +15,6 @@ import java.math.BigDecimal;
 @Builder
 public class Ticket {
     private Long id;
-    private ArticleDTO article;
+    private List<Product> article;
     private BigDecimal total;
 }

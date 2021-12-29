@@ -1,7 +1,6 @@
 package com.mercadolivre.desafiospring1.controllers;
 
-import com.mercadolivre.desafiospring1.dtos.ArticleDTO;
-import com.mercadolivre.desafiospring1.entities.Article;
+import com.mercadolivre.desafiospring1.dtos.article_purchase.ArticlePurchaseDTO;
 import com.mercadolivre.desafiospring1.entities.Ticket;
 import com.mercadolivre.desafiospring1.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class TicketController {
@@ -19,7 +20,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping(path = "/purchase-request")
-    public ResponseEntity<Ticket> purchaseRequest(@RequestBody ArticleDTO article) {
-        return ResponseEntity.status(201).body(ticketService.purchaseRequest(article));
+    public ResponseEntity<Ticket> purchaseRequest(@RequestBody ArticlePurchaseDTO articlePurchase) {
+        return ResponseEntity.status(201).body(ticketService.purchaseRequest(articlePurchase));
     }
 }
