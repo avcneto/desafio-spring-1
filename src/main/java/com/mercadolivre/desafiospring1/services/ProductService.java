@@ -32,6 +32,12 @@ public class ProductService {
         return products;
     }
 
+    public List<Product> findAllProductsAvaliable() {
+        return findAllProducts().stream()
+                .filter(p -> p.getQuantity() > 0)
+                .collect(Collectors.toList());
+    }
+
     public List<Product> getProductByAnyQuery(Map<String, String> requestParams) {
 
         List<Product> productList = findAllProducts();
