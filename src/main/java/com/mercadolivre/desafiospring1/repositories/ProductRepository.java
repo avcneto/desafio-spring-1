@@ -17,12 +17,21 @@ public class ProductRepository {
 
     private List<Product> products = new ArrayList<>();
     private final String PATH = "src/main/resources/json/products.json";
-    private ObjectMapper objectMapper = new ObjectMapper().enable(  SerializationFeature.INDENT_OUTPUT);
+    private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public List<Product> findAllProducts() throws IOException {
         File file = new File(PATH);
         FileInputStream is = new FileInputStream(file);
         products = Arrays.asList(objectMapper.readValue(is, Product[].class));
         return products;
+    }
+
+    public void saveProduct(Product product) throws IOException {
+        findAllProducts();
+        List<Product> listProdutos = new ArrayList<>(products);
+        product.setProductId((long) (listProdutos.size()+1));
+        listProdutos.add(product);
+
+        objectMapper.writeValue(new File(PATH), listProdutos);
     }
 }
