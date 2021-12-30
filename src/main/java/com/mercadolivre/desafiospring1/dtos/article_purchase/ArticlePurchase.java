@@ -12,4 +12,10 @@ public class ArticlePurchase {
     private String name;
     private String brand;
     private Integer quantity;
+
+    @Override
+    public String toString() {
+        return "name='" + name;
+
+    }
 }
