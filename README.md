@@ -2,5 +2,76 @@
 Primeiro desafio Spring pelo Bootcamp MELI/Digital House.
 
 
-
+<table>
+	<caption>Endpoints</caption>
+	<thead>
+	<tr>
+		<th>Método</th>
+		<th>Endpoint</th>
+    <th>Descrição</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>POST</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>POST</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+  <tr>
+		<td>POST</td>
+		<td>&nbsp;</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tbody>
+</table>
 
