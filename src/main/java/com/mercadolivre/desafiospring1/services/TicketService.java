@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.mercadolivre.desafiospring1.util.Constants.MESSAGE_ERROR_NOT_FOUND;
+import static com.mercadolivre.desafiospring1.util.Constants.MESSAGE_ERROR_REPOSITORY_SAVE;
+
 @Service
 public class TicketService {
     @Autowired
@@ -50,7 +53,7 @@ public class TicketService {
             ticketRepository.saveTicket(ticket);
         } catch (IOException e){
             e.printStackTrace();
-            throw new RepositoryException("Error to save ticket.");
+            throw new RepositoryException(MESSAGE_ERROR_REPOSITORY_SAVE);
         }
 
         return ticket;
@@ -79,7 +82,7 @@ public class TicketService {
 
     public void productNotExist(List<ArticlePurchase> productsNotExist) {
         if (!productsNotExist.isEmpty()) {
-            throw new PurchaseException("Products not found " + productsNotExist.toString());
+            throw new PurchaseException(MESSAGE_ERROR_NOT_FOUND + productsNotExist.toString());
         }
     }
 

@@ -114,4 +114,32 @@ public class ProductService {
         article.getArticles().forEach(product -> dto.getArticlesDTO().add(ProductDTO.convert(product)));
         return dto;
     }
+    
+    public List<Product> filterProducts(Map.Entry<String, String> entry) {
+
+
+        List<Product> productList = findAllProducts();
+
+        if (!entry.getValue().equals(null)) {
+            productList = productList.stream().filter(product -> {
+                String valor = entry.getValue();
+
+                if (Is.isNumericException(valor) && product.getPrice().compareTo(new BigDecimal(String.valueOf(valor))) <= 0)
+                    return true;
+                if (Is.isBooleanException(valor) && product.isFreeShipping() == Boolean.parseBoolean(valor))
+                    return true;
+                if (product.getCategory().equalsIgnoreCase(valor))
+                    return true;
+                if (product.getBrand().equalsIgnoreCase(valor))
+                    return true;
+                if (product.getName().equalsIgnoreCase(valor))
+                    return true;
+                if (product.getPrestige().equalsIgnoreCase(valor))
+                    return true;
+                return false;
+            }).collect(Collectors.toList());
+        }
+        
+        return productList;
+    }
 }

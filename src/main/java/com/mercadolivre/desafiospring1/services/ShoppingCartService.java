@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.mercadolivre.desafiospring1.util.Constants.MESSAGE_ERROR_REPOSITORY_FIND;
+
 @Service
 public class ShoppingCartService {
 
@@ -33,7 +35,7 @@ public class ShoppingCartService {
         try{
             return ticketRepository.findAllTickets();
         }catch (IOException e) {
-            throw new RepositoryException("Error to find tickets.");
+            throw new RepositoryException(MESSAGE_ERROR_REPOSITORY_FIND);
         }
     }
 }
