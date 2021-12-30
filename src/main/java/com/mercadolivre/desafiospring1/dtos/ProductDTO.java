@@ -15,7 +15,7 @@ public class ProductDTO {
     private String name;
     private Integer quantity;
 
-    public static ProductDTO converte(Product product){
+    public static ProductDTO convert(Product product){
         return ProductDTO.builder()
                 .productId(product.getProductId())
                 .name(product.getName())

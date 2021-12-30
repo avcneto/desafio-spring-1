@@ -17,7 +17,7 @@ public class ProductRepository {
 
     private List<Product> products = new ArrayList<>();
     private final String PATH = "src/main/resources/json/products.json";
-    private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public List<Product> findAllProducts() throws IOException {
         File file = new File(PATH);
@@ -28,10 +28,10 @@ public class ProductRepository {
 
     public void saveProduct(Product product) throws IOException {
         findAllProducts();
-        List<Product> listProdutos = new ArrayList<>(products);
-        product.setProductId((long) (listProdutos.size()+1));
-        listProdutos.add(product);
+        List<Product> listProducts = new ArrayList<>(products);
+        product.setProductId((long) (listProducts.size()+1));
+        listProducts.add(product);
 
-        objectMapper.writeValue(new File(PATH), listProdutos);
+        objectMapper.writeValue(new File(PATH), listProducts);
     }
 }

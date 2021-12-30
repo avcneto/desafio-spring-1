@@ -20,8 +20,10 @@ public class Product {
     private boolean freeShipping;
     private String prestige;
 
-    public Product(Long productId) {
+    public Product(Long productId, String name, String brand) {
         this.productId = productId;
+        this.name = name;
+        this.brand = brand;
     }
 
     @Override
@@ -29,12 +31,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productId, product.productId);
+        return Objects.equals(productId, product.productId) && Objects.equals(name, product.name) && Objects.equals(brand, product.brand);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId);
+        return Objects.hash(productId, name, brand);
     }
-
 }

@@ -12,38 +12,67 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class TicketService {
-
     @Autowired
     private ProductService productService;
 
     public Ticket purchaseRequest(ArticlePurchaseDTO articlePurchase) {
-        List<ArticlePurchase> productsNotExist = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
-        List<Product> productList = productService.findAllProductsAvaliable();
         BigDecimal total = BigDecimal.ZERO;
+        List<Product> products = new ArrayList<>();
+        List<ArticlePurchase> productsNotExist = new ArrayList<>();
+        List<Product> productList = productService.findAllProductsAvaliable();
 
         for (ArticlePurchase purchase : articlePurchase.getArticlePurchases()) {
-            Product product = new Product(purchase.getProductId());
-            if (productList.contains(product)) {
-                Product prod = productList.get(productList.indexOf(product));
-                if (prod.getQuantity() < purchase.getQuantity()) {
-                    throw new PurchaseException("Product " + prod.getName() + " quantity unavailable. Available quantity: " + prod.getQuantity());
-                }
-                total = total.add(prod.getPrice().multiply(new BigDecimal(purchase.getQuantity())));
-                products.add(prod);
+            Product product = new Product(purchase.getProductId(), purchase.getName(), purchase.getBrand());
 
-            } else {
-                productsNotExist.add(purchase);
+            if (validateProducts(purchase, product, productList, productsNotExist)) {
+                Product prod = productList.get(productList.indexOf(product));
+                Product prodPurchase = createPurchase(purchase, prod);
+
+                validateQuantity(prodPurchase, prod);
+                total = total.add(calculatePrice(prodPurchase));
+                products.add(prodPurchase);
             }
         }
 
+        productNotExist(productsNotExist);
+        return new Ticket(new Random().nextInt(Integer.MAX_VALUE) + 2L, products, total);
+    }
+
+    public boolean validateProducts(ArticlePurchase purchase,
+                                    Product product, List<Product> productList, List<ArticlePurchase> productsNotExist) {
+        if (!productList.contains(product)) {
+            productsNotExist.add(purchase);
+            return false;
+        }
+        return true;
+    }
+
+    public BigDecimal calculatePrice(Product prodPurchase) {
+        return prodPurchase.getPrice().multiply(new BigDecimal(prodPurchase.getQuantity()));
+    }
+
+    public void validateQuantity(Product purchase, Product product) {
+        if (product.getQuantity() < purchase.getQuantity())
+            throw new PurchaseException("Product "
+                    + product.getName() +
+                    " quantity unavailable. Available quantity: "
+                    + product.getQuantity());
+    }
+
+    public void productNotExist(List<ArticlePurchase> productsNotExist) {
         if (!productsNotExist.isEmpty()) {
             throw new PurchaseException("Products not found " + productsNotExist.toString());
         }
+    }
 
-        return new Ticket(1L, products, total);
+    public Product createPurchase(ArticlePurchase purchase, Product prod) {
+
+        return new Product(prod.getProductId(), prod.getName(), prod.getCategory(), prod.getBrand(),
+                purchase.getQuantity(), prod.getPrice(), prod.isFreeShipping(), prod.getPrestige());
+
     }
 }

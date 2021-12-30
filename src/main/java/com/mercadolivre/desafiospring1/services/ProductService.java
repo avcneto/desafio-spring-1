@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -92,17 +93,25 @@ public class ProductService {
     }
 
     public ArticleDTO saveProducts(Article article) {
+        try {
+            List<Product> productDb = productRepository.findAllProducts();
+            List<Product> productsArticles = article.getArticles();
 
-        article.getArticles().forEach(product -> {
-            try {
-                productRepository.saveProduct(product);
-            } catch (IOException e) {
-                throw new RepositoryException(e.getMessage());
+            for (Product p : productsArticles) {
+
+                if (!productDb.contains(p)) {
+                    productRepository.saveProduct(p);
+                } else {
+                    throw new RepositoryException("Product already exists " + p.getName());
+                }
             }
-        });
+
+        } catch (IOException e) {
+            throw new RepositoryException(e.getMessage());
+        }
 
         ArticleDTO dto = new ArticleDTO();
-        article.getArticles().forEach(product -> dto.getArticlesDTO().add(ProductDTO.converte(product)));
+        article.getArticles().forEach(product -> dto.getArticlesDTO().add(ProductDTO.convert(product)));
         return dto;
     }
 }
