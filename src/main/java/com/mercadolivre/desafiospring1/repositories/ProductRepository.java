@@ -29,7 +29,7 @@ public class ProductRepository {
     public void saveProduct(Product product) throws IOException {
         findAllProducts();
         List<Product> listProducts = new ArrayList<>(products);
-        product.setProductId((long) (listProducts.size()+1));
+        product.setProductId((long) (listProducts.size() + 1));
         listProducts.add(product);
 
         objectMapper.writeValue(new File(PATH), listProducts);

@@ -19,22 +19,21 @@ public class ShoppingCartService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    public BigDecimal getTotalTickets(){
+    public BigDecimal getTotalTickets() {
 
-            return getAllTickets().stream()
-                    .map(Ticket::getTotal)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return getAllTickets().stream()
+                .map(Ticket::getTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public ShoppingCart getShoppingCart(){
-
+    public ShoppingCart getShoppingCart() {
         return new ShoppingCart(getAllTickets(), getTotalTickets());
     }
 
-    public List<Ticket> getAllTickets(){
-        try{
+    public List<Ticket> getAllTickets() {
+        try {
             return ticketRepository.findAllTickets();
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RepositoryException(MESSAGE_ERROR_REPOSITORY_FIND);
         }
     }

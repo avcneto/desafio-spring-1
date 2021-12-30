@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,13 +23,11 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> findAllProducts() {
-        List<Product> products = null;
         try {
-            products = productRepository.findAllProducts();
+            return productRepository.findAllProducts();
         } catch (IOException e) {
             throw new RepositoryException(e.getMessage());
         }
-        return products;
     }
 
     public List<Product> findAllProductsAvaliable() {
@@ -40,13 +37,12 @@ public class ProductService {
     }
 
     public List<Product> getProductByAnyQuery(Map<String, String> requestParams) {
-
         List<Product> productList = findAllProducts();
-        String order = requestParams.containsKey("order") ? requestParams.get("order") : "";
+        String order = requestParams.getOrDefault("order", "");
         requestParams.remove("order");
 
         for (Map.Entry<String, String> entry : requestParams.entrySet()) {
-            if (!entry.getValue().equals(null)) {
+            if (entry.getValue() != null) {
                 productList = productList.stream().filter(product -> {
                     String valor = requestParams.get(entry.getKey());
 
@@ -114,13 +110,11 @@ public class ProductService {
         article.getArticles().forEach(product -> dto.getArticlesDTO().add(ProductDTO.convert(product)));
         return dto;
     }
-    
+
     public List<Product> filterProducts(Map.Entry<String, String> entry) {
-
-
         List<Product> productList = findAllProducts();
 
-        if (!entry.getValue().equals(null)) {
+        if (entry.getValue() != null) {
             productList = productList.stream().filter(product -> {
                 String valor = entry.getValue();
 
@@ -139,7 +133,7 @@ public class ProductService {
                 return false;
             }).collect(Collectors.toList());
         }
-        
+
         return productList;
     }
 }

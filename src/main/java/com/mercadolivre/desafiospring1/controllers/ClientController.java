@@ -17,23 +17,20 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Client> saveClient(@RequestBody Client client){
+    public ResponseEntity<Client> saveClient(@RequestBody Client client) {
         clientService.createClient(client);
-        return  ResponseEntity.status(201).body(client);
+        return ResponseEntity.status(201).body(client);
     }
 
-    @GetMapping(path ="/all")
-    public ResponseEntity<List<Client>> findAll( ){
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Client>> findAll() {
         List<Client> listCli = clientService.findAll();
-        return  ResponseEntity.status(200).body(listCli);
+        return ResponseEntity.status(200).body(listCli);
     }
-    @GetMapping(path ="/state")
-    public ResponseEntity<List<Client>> findAllByState(@RequestParam String state){
+
+    @GetMapping(path = "/state")
+    public ResponseEntity<List<Client>> findAllByState(@RequestParam String state) {
         List<Client> listCli = clientService.findAllByState(state);
-        return  ResponseEntity.status(200).body(listCli);
+        return ResponseEntity.status(200).body(listCli);
     }
-
-
-
-
 }

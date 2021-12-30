@@ -2,7 +2,6 @@ package com.mercadolivre.desafiospring1.repositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mercadolivre.desafiospring1.entities.Product;
 import com.mercadolivre.desafiospring1.entities.Ticket;
 import org.springframework.stereotype.Repository;
 
@@ -16,15 +15,13 @@ import java.util.List;
 @Repository
 public class TicketRepository {
 
-    private List<Ticket> tickets = new ArrayList<>();
     private final String PATH = "src/main/resources/json/tickets.json";
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public List<Ticket> findAllTickets() throws IOException {
         File file = new File(PATH);
         FileInputStream is = new FileInputStream(file);
-        tickets = Arrays.asList(objectMapper.readValue(is, Ticket[].class));
-        return tickets;
+        return Arrays.asList(objectMapper.readValue(is, Ticket[].class));
     }
 
     public void saveTicket(Ticket ticket) throws IOException {

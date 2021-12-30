@@ -1,6 +1,5 @@
 package com.mercadolivre.desafiospring1.entities;
 
-import com.mercadolivre.desafiospring1.dtos.ArticleDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

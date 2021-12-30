@@ -19,5 +19,4 @@ public class ShoppingCartController {
     public ResponseEntity<ShoppingCart> getShoppingCart() {
         return ResponseEntity.ok(shoppingCartService.getShoppingCart());
     }
-
 }

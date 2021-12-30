@@ -23,13 +23,12 @@ public class ClientRepository {
     private final String PATH = "src/main/resources/json/clients.json";
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-    public List<Client> findAllClients()  {
+    public List<Client> findAllClients() {
         File file = new File(PATH);
-        FileInputStream is = null;
 
         try {
 
-            is = new FileInputStream(file);
+            FileInputStream is = new FileInputStream(file);
             client = Arrays.asList(objectMapper.readValue(is, Client[].class));
 
         } catch (FileNotFoundException e) {
@@ -47,10 +46,8 @@ public class ClientRepository {
 
     public void saveClient(Client client) {
         try {
-
             List<Client> listClients = new ArrayList<>(findAllClients());
-
-            if(listClients.contains(client))
+            if (listClients.contains(client))
                 throw new RepositoryException("Customer already exists in the database");
 
             listClients.add(client);

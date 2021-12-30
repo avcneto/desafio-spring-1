@@ -7,7 +7,6 @@ import com.mercadolivre.desafiospring1.entities.Ticket;
 import com.mercadolivre.desafiospring1.exception.PurchaseException;
 import com.mercadolivre.desafiospring1.exception.RepositoryException;
 import com.mercadolivre.desafiospring1.repositories.TicketRepository;
-import com.sun.jdi.request.InvalidRequestStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +34,9 @@ public class TicketService {
 
         for (ArticlePurchase purchase : articlePurchase.getArticlePurchases()) {
             Product product = new Product(purchase.getProductId(), purchase.getName(), purchase.getBrand());
-
             if (validateProducts(purchase, product, productList, productsNotExist)) {
                 Product prod = productList.get(productList.indexOf(product));
                 Product prodPurchase = createPurchase(purchase, prod);
-
                 validateQuantity(prodPurchase, prod);
                 total = total.add(calculatePrice(prodPurchase));
                 products.add(prodPurchase);
@@ -49,9 +46,9 @@ public class TicketService {
         productNotExist(productsNotExist);
         Ticket ticket = new Ticket(new Random().nextInt(Integer.MAX_VALUE) + 2L, products, total);
 
-        try{
+        try {
             ticketRepository.saveTicket(ticket);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RepositoryException(MESSAGE_ERROR_REPOSITORY_SAVE);
         }
@@ -65,6 +62,7 @@ public class TicketService {
             productsNotExist.add(purchase);
             return false;
         }
+
         return true;
     }
 
@@ -87,10 +85,7 @@ public class TicketService {
     }
 
     public Product createPurchase(ArticlePurchase purchase, Product prod) {
-
         return new Product(prod.getProductId(), prod.getName(), prod.getCategory(), prod.getBrand(),
                 purchase.getQuantity(), prod.getPrice(), prod.isFreeShipping(), prod.getPrestige());
-
     }
-
 }
