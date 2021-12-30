@@ -14,63 +14,68 @@ Primeiro desafio Spring pelo Bootcamp MELI/Digital House.
 	<tbody>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles?category=categoryName</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles?filter1=filter1Value&filter2=filter2Value</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+        <td>/api/v1/articles?filter1=filter1Value&filter2=filter2Value&order=0</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles?filter1=filter1Value&filter2=filter2Value&order=1</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles?filter1=filter1Value&filter2=filter2Value&order=2</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/articles?filter1=filter1Value&filter2=filter2Value&order=3</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/cart</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/client/all</td>
+        <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>/api/v1/client/state</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/purchase-request</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/insert-articles-request</td>
+        <td>&nbsp;</td>
 	</tr>
-  <tr>
+    <tr>
 		<td>POST</td>
-		<td>&nbsp;</td>
-    <td>&nbsp;</td>
+		<td>/api/v1/client/add</td>
+        <td>&nbsp;</td>
 	</tr>
 	<tbody>
 </table>
