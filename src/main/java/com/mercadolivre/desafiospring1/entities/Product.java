@@ -20,6 +20,10 @@ public class Product {
     private boolean freeShipping;
     private String prestige;
 
+    public Product(Long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
