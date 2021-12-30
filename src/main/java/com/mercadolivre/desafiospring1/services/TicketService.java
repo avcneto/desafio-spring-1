@@ -5,10 +5,13 @@ import com.mercadolivre.desafiospring1.dtos.article_purchase.ArticlePurchaseDTO;
 import com.mercadolivre.desafiospring1.entities.Product;
 import com.mercadolivre.desafiospring1.entities.Ticket;
 import com.mercadolivre.desafiospring1.exception.PurchaseException;
+import com.mercadolivre.desafiospring1.exception.RepositoryException;
+import com.mercadolivre.desafiospring1.repositories.TicketRepository;
 import com.sun.jdi.request.InvalidRequestStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.Random;
 public class TicketService {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private TicketRepository ticketRepository;
 
     public Ticket purchaseRequest(ArticlePurchaseDTO articlePurchase) {
         BigDecimal total = BigDecimal.ZERO;
@@ -39,7 +44,16 @@ public class TicketService {
         }
 
         productNotExist(productsNotExist);
-        return new Ticket(new Random().nextInt(Integer.MAX_VALUE) + 2L, products, total);
+        Ticket ticket = new Ticket(new Random().nextInt(Integer.MAX_VALUE) + 2L, products, total);
+
+        try{
+            ticketRepository.saveTicket(ticket);
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new RepositoryException("Error to save ticket.");
+        }
+
+        return ticket;
     }
 
     public boolean validateProducts(ArticlePurchase purchase,
@@ -75,4 +89,5 @@ public class TicketService {
                 purchase.getQuantity(), prod.getPrice(), prod.isFreeShipping(), prod.getPrestige());
 
     }
+
 }
