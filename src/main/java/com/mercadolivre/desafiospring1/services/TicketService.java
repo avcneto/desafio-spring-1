@@ -7,7 +7,6 @@ import com.mercadolivre.desafiospring1.entities.Ticket;
 import com.mercadolivre.desafiospring1.exception.PurchaseException;
 import com.mercadolivre.desafiospring1.exception.RepositoryException;
 import com.mercadolivre.desafiospring1.repositories.TicketRepository;
-import com.sun.jdi.request.InvalidRequestStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +48,9 @@ public class TicketService {
         productNotExist(productsNotExist);
         Ticket ticket = new Ticket(new Random().nextInt(Integer.MAX_VALUE) + 2L, products, total);
 
-        try{
+        try {
             ticketRepository.saveTicket(ticket);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RepositoryException(MESSAGE_ERROR_REPOSITORY_SAVE);
         }

@@ -1,7 +1,5 @@
 package com.mercadolivre.desafiospring1.repositories;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mercadolivre.desafiospring1.entities.Client;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,22 +20,14 @@ public class ClientRepository {
     private final String PATH = "src/main/resources/json/clients.json";
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-    public List<Client> findAllClients()  {
+    public List<Client> findAllClients() {
         File file = new File(PATH);
-        FileInputStream is = null;
 
         try {
-
-            is = new FileInputStream(file);
+            FileInputStream is = new FileInputStream(file);
             client = Arrays.asList(objectMapper.readValue(is, Client[].class));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-        } catch (DatabindException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -50,7 +39,7 @@ public class ClientRepository {
 
             List<Client> listClients = new ArrayList<>(findAllClients());
 
-            if(listClients.contains(client))
+            if (listClients.contains(client))
                 throw new RepositoryException("Customer already exists in the database");
 
             listClients.add(client);
