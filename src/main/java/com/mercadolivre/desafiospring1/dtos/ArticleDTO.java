@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ArticleDTO {
+    private Long id;
     private List<ProductDTO> articlesDTO = new ArrayList<>();
 
 }

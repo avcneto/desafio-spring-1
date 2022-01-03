@@ -151,4 +151,13 @@
   "price" : 500,
   "freeShipping" : true,
   "prestige" : "****"
+}, {
+  "productId" : 18,
+  "name" : "Furadeiraa",
+  "category" : "Ferramentas",
+  "brand" : "Black & Deckerr",
+  "quantity" : 7,
+  "price" : 500,
+  "freeShipping" : true,
+  "prestige" : "****"
 } ]
