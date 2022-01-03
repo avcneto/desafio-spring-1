@@ -5,4 +5,11 @@
   "address" : "rua mercadolivre",
   "state" : "ml",
   "birthDate" : "1995-06-07"
+}, {
+  "cpf" : "12345678912",
+  "name" : "Meli fulano",
+  "email" : "meli@meli.com",
+  "address" : "rua mercadolivre",
+  "state" : "ml",
+  "birthDate" : "1995-06-07"
 } ]

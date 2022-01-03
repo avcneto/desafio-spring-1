@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,12 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping(path = "/purchase-request")
-    public ResponseEntity<Ticket> purchaseRequest(@RequestBody ArticlePurchaseDTO articlePurchase) {
-        return ResponseEntity.status(201).body(ticketService.purchaseRequest(articlePurchase));
+    public ResponseEntity<Ticket> purchaseRequest(@RequestBody ArticlePurchaseDTO articlePurchase, UriComponentsBuilder uriBuilder) {
+        Ticket ticket = ticketService.purchaseRequest(articlePurchase);
+        URI uri = uriBuilder
+                .path("/purchase-request/{id}")
+                .buildAndExpand(ticket.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(ticket);
     }
 }
