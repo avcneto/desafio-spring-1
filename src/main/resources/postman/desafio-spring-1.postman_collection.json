@@ -262,7 +262,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/v1/client/state?state=sp",
+					"raw": "localhost:8080/api/v1/client/state?state=ml",
 					"host": [
 						"localhost"
 					],
@@ -276,7 +276,7 @@
 					"query": [
 						{
 							"key": "state",
-							"value": "sp"
+							"value": "ml"
 						}
 					]
 				}
@@ -313,7 +313,7 @@
 			"response": []
 		},
 		{
-			"name": "Salva novos produtos",
+			"name": "Salva novos cliente",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -343,13 +343,13 @@
 			"response": []
 		},
 		{
-			"name": "Adiciona novos clientes",
+			"name": "Adiciona Produtos",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"cpf\": \"12345678911\",\r\n   \"name\": \"Meli fulano\",\r\n   \"email\": \"meli@meli.com\",\r\n   \"address\": \"rua mercadolivre\",\r\n   \"state\": \"ml\",\r\n   \"birthDate\": \"1995-06-07\"\r\n}",
+					"raw": "{\r\n    \"articles\": [\r\n        {\r\n            \"productId\": 20,\r\n            \"name\": \"Furadeiraa\",\r\n            \"category\": \"Ferramentas\",\r\n            \"brand\": \"Black & Deckerr\",\r\n            \"quantity\": 7,\r\n            \"price\": 500,\r\n            \"freeShipping\": true,\r\n            \"prestige\": \"****\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -357,7 +357,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/client/add",
+					"raw": "localhost:8080/api/v1/insert-articles-request",
 					"host": [
 						"localhost"
 					],
@@ -365,8 +365,7 @@
 					"path": [
 						"api",
 						"v1",
-						"client",
-						"add"
+						"insert-articles-request"
 					]
 				}
 			},
